@@ -1,0 +1,1 @@
+`BankingApp` represents a basic banking app that creates a bank account and a client that directs banking activities (e.g., deposits, withdraws). It is a very simple Java app intended to provide practice with very basic Java concepts.
