@@ -1,1 +1,3 @@
 `BankingApp` represents a basic banking app that creates a bank account and a client that directs banking activities (e.g., deposits, withdraws). It is a very simple Java app intended to provide practice with very basic Java concepts.
+
+`FizzBuzz` simulates the child's game "FizzBuzz". It is very simple Java code designed for basic practice. There is no object orientation (just a single main class). It introduces the idea of modulus for determining when one number is divisible by another.
