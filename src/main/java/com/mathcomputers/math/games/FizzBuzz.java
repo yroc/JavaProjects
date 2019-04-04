@@ -1,4 +1,4 @@
-package com.mathcomputers.games;
+package com.mathcomputers.math.games;
 
 /** This program plays the game "FizzBuzz". It counts to 100, replacing each
  *  multiple of 5 with the word "fizz", each multiple of 7 with the word "buzz",

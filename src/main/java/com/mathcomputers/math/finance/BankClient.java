@@ -1,4 +1,4 @@
-package com.mathcomputers.banking;
+package com.mathcomputers.math.finance;
 
 public class BankClient
 {
