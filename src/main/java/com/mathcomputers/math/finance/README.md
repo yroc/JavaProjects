@@ -8,7 +8,6 @@ Create a console app that consists of a class that encapsulates a bank account. 
 * Print the current balance to the console in the form `The current balance of this account is $x.xx`.
 ### Possible future versions
 Make app interactive. When started, the app displays the following prompt: `What would you like to do? (Enter ? for options)` The displayed options would be:
-
 ```
 c, create account
 d, deposit money
