@@ -6,9 +6,12 @@ Create a console app that consists of a class that encapsulates a bank account. 
 * Depositing money into the account and accurately updating the balance.
 * Withdrawing money from the account and accurately updating the balance. If there are insufficient funds in the account, the bank account should not withdraw the funds (i.e., not update the balance) and instead print the statement to the console `Withdraw unsuccessful; insufficient funds")`
 * Print the current balance to the console in the form `The current balance of this account is $x.xx`.
+
+Create client code to test the class.
 ### Possible future versions
-Make app interactive. When started, the app displays the following prompt: `What would you like to do? (Enter ? for options)` The displayed options would be:
+Make the app interactive. When started, the app should display the following prompt: `What would you like to do? (Enter ? for options)` If the user enters `?`, the app should display:
 ```
+Options:
 c, create account
 d, deposit money
 w, withdraw money
