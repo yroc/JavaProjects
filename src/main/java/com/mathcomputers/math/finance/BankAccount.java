@@ -30,12 +30,7 @@ public class BankAccount
 		System.out.println(String.format("but your account only contains $%.2f", this.balance));
 	    }
     }
-
-    public double getBalance()
-    {
-	return this.balance;
-    }
-    
+  
     public String toString()
     {
 	return String.format("After transactions, balance = $%.2f", this.balance);
