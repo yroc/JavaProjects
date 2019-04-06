@@ -1,6 +1,6 @@
 package com.mathcomputers.math;
 
-public class FibonacciSeries
+public class FibonacciSequence
 {
     public static void main(String[] arguments)
     {
