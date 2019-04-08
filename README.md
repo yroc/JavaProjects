@@ -60,7 +60,7 @@ Important points to keep in mind:
 
   Then, to tell `javac` to put its output in the “bin branch”, use the `-d` option (“directory”). For example:
 
-  `javac -d ~/JavaProjects/bin/main/java/ com/mathcomputers/math/finance/BankAccount.java
+  `javac -d ~/JavaProjects/bin/main/java/ com/mathcomputers/math/finance/BankAccount.java`
 
 ## Running an app
 Again, navigate to just outside the package directory. For example, from here:
@@ -69,7 +69,7 @@ Again, navigate to just outside the package directory. For example, from here:
 
 Use the package name, not the filename:
 
-java com.mathcomputers.math.finance.BankAccount
+`java com.mathcomputers.math.finance.BankAccount`
 
 ## Placing an app under Git verison control
 ### Check Git installation
@@ -140,12 +140,12 @@ Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are O
 3. Pick a repository name (e.g., `JavaProjects`) and a description (e.g., `A collection of Java projects for practice.`
 
 #### Establish a connection between the local and remote repository
-`git remote add origin https://github.com/yroc/JavaProjects.git
+`git remote add origin https://github.com/yroc/JavaProjects.git`
 
 #### Upload local repository
-'git push -u origin master`
+`git push -u origin master`
 
 For subsequent pushes (uploads), you only need `git push`
 
 ## Add a README.md
-Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own README.md
+Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
