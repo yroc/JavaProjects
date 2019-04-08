@@ -9,7 +9,7 @@ Create a console app that consists of a class that encapsulates a bank account. 
 
 Create client code to test the class.
 ### Possible future versions
-Make the app interactive. When started, the app should display the following prompt: `What would you like to do? (Enter ? for options)` If the user enters `?`, the app should display:
+* Make the app interactive. When started, the app should display the following prompt: `What would you like to do? (Enter ? for options)` If the user enters `?`, the app should display:
 ```
 Options:
 c, create account
@@ -17,3 +17,4 @@ d, deposit money
 w, withdraw money
 p, print current balance
 ```
+* Incorporate a validation mechanism to deal with invalid entries (e.g., negative number or non-number input for deposits or withdraws).
