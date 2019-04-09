@@ -1,5 +1,7 @@
 package com.mathcomputers.math.games;
 
+import java.lang.System;
+
 /** This program plays the game "FizzBuzz". It counts to 100, replacing each
  *  multiple of 5 with the word "fizz", each multiple of 7 with the word "buzz",
  *  and each multiple of both with the word "fizzbuzz".

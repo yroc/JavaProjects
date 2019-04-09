@@ -1,5 +1,7 @@
 package com.mathcomputers.math;
 
+import java.lang.System;
+
 public class FibonacciSequence
 {
     public static void main(String[] arguments)
