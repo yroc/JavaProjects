@@ -154,3 +154,42 @@ Each Git repository has at least one `README.md` file. Each subdirectory in the 
 
 ## Renaming a file in Git
 `git mv FibonacciSequence.java SequenceGenerator.java
+
+## Example of error, “Non-static method cannot be referenced from a static context”
+Trying to run this code gives the “non-static” error:
+```java
+public class Sequences
+{
+    public void fibonacciSequence()
+    {
+	int i_2 = 1;		// The (i - 2)th term
+	int i_1 = 1;		// The (i - 1)th term
+	int i;			// The ith term
+
+	// Print out the initial two terms
+	System.out.print(i_2 + ", ");
+	System.out.print(i_1 + ", ");
+
+	// Compute and print the next 17 terms
+	for (int n = 1; n <=17; n++)
+	    {
+		i = i_2 + i_1;
+		System.out.print(i + ", ");
+		i_2 = i_1;
+		i_1 = i;
+	    }
+
+	// Print out the last term
+	System.out.println(i_2 + i_1);
+    }
+
+    public static void main(String[] arguments)
+    {
+	
+	fibonacciSequence();
+    }
+}
+```
+Why? Because in the `main` method, you're trying to invoke a *non-static* method (`fibonacciSequence`) as if it were static (i.e., there is no object instantiation, and you're not calling `fibonacciSequence()` on an object).
+
+To make this right, you must either make `fibonacciSequence()` static, or else instantiate a `Sequences` object and call `fibonacciSequence` on that object. But notice that `Sequences` has no constructor, and also notice that it has no attributes (no state), so it appears, at least for the time being, it makes sense to leave the class as a *utility* (static) class. In that case, just make `fibonacciSequence` static, and you're good to go!
