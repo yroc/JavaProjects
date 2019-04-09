@@ -133,6 +133,8 @@ Summary of Chris Beams' Git commit message rules:
 Subject line: Separate subject from body with a blank line, limit to 50 chars, sentence case, don't  end with a period, imperative mood.
 Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are OK (use dash or asterisk as bullet).
 
+* To wrap at 72 characters, use `C-x f` to set fill-column width, and `M-q` to fill a paragraph.
+
 ### Transfering project to Github (remote repository)
 #### Create a new remote repository
 1. Sign into github.com
@@ -149,3 +151,6 @@ For subsequent pushes (uploads), you only need `git push`
 
 ## Add a README.md
 Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
+
+## Renaming a file in Git
+`git mv FibonacciSequence.java SequenceGenerator.java
