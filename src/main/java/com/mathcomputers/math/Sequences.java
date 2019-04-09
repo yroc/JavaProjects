@@ -2,9 +2,9 @@ package com.mathcomputers.math;
 
 import java.lang.System;
 
-public class FibonacciSequence
+public class Sequences
 {
-    public static void main(String[] arguments)
+    public static void fibonacciSequence()
     {
 	int i_2 = 1;		// The (i - 2)th term
 	int i_1 = 1;		// The (i - 1)th term
@@ -25,5 +25,11 @@ public class FibonacciSequence
 
 	// Print out the last term
 	System.out.println(i_2 + i_1);
+    }
+
+    public static void main(String[] arguments)
+    {
+	
+	Sequences.fibonacciSequence();
     }
 }
