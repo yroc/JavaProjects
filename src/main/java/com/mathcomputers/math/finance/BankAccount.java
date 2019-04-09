@@ -27,7 +27,7 @@ public class BankAccount
 	    }
 	else
 	    {
-		System.out.println("Sorry, insufficient funds.");
+		System.out.println("Withdraw unsuccessful; insufficient funds.");
 		System.out.println(String.format("You are trying to withdraw $%.2f", amount));
 		System.out.println(String.format("but your account only contains $%.2f", this.balance));
 	    }
