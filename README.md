@@ -193,3 +193,12 @@ public class Sequences
 Why? Because in the `main` method, you're trying to invoke a *non-static* method (`fibonacciSequence`) as if it were static (i.e., there is no object instantiation, and you're not calling `fibonacciSequence()` on an object).
 
 To make this right, you must either make `fibonacciSequence()` static, or else instantiate a `Sequences` object and call `fibonacciSequence` on that object. But notice that `Sequences` has no constructor, and also notice that it has no attributes (no state), so it appears, at least for the time being, it makes sense to leave the class as a *utility* (static) class. In that case, just make `fibonacciSequence` static, and you're good to go!
+
+## Categorizing the input
+When creating a program, a useful tip is to categorize the input into a finite number cases. Think about the input systematically (i.e., in order). For example, if the input is of type String, are strings of any length allowed? If so, start with the simplest case (i.e., the empty string), and work your way up. Maybe the empty string needs to be handled one way, and strings of length 1 or 2 must be handled a different way (but the same way as each other), and strings of length greater than 2 must be handled in yet a different way (but the same as each other).
+
+## Java String substring method
+```public String substring(int beginIndex,
+                  int endIndex)
+```
+> Returns a new string that is a substring of this string. The substring begins at the specified `beginIndex` and extends to the character at index `endIndex - 1`. Thus, the length of the substring is `endIndex-beginIndex`.
