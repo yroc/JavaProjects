@@ -22,17 +22,15 @@ Here are some general points to keep in mind when designing an app:
 * `src/main/java/` follows the *Gradle* standard.
 * `com/mathcomputers` is the reverse domain portion of the directory—its purpose is to provide a namespace for the package name.
 * `math/finance` is the actual package directory.
-
 * Make nested directories in *Emacs* with `M-x make-directory`
-* Or from the shell, use `mkdir --parents`
+* Or, from the shell, using `mkdir --parents`
 * Check that the directory hierarchy was successfully created with `ls -R`
 
 ## What are packages?
 A grouping of related classes and/or interfaces
 ### Grouping mechanism
-All classes and interfaces belonging to the same packages are:
-* Placed in the same directory
-* Each source file contains a *package declaration*, which declares the name of the package they belong to
+* All classes and interfaces belonging to the same packages are placed in the same directory
+* Each source file contains a *package declaration*, which declares the name of the package the type belongs to
 * Package name mirrors the directory hierarchy that the source files are placed in
 ### Why packages?
 * Organizing types into logical categories makes it easier for the programmer and client to find them
@@ -40,8 +38,8 @@ All classes and interfaces belonging to the same packages are:
 * A means of access control (e.g., if a member of a class is `protected`, then it can be invoked/accessed within the package but not outside the package)
 ##Source file structure
 Every class has the general structure
-1. Package declaration: which package this class is in
-2. Import statement(s): using other people's types
+1. Package declaration: tells the compiler which package this class belongs to
+2. Import statement(s): tells the compiler where to find types that belong to other packages (i.e., packages outside this class's package)
 3. Class header and body
 ## Compiling
 Important points to keep in mind:
@@ -198,7 +196,8 @@ To make this right, you must either make `fibonacciSequence()` static, or else i
 When creating a program, a useful tip is to categorize the input into a finite number cases. Think about the input systematically (i.e., in order). For example, if the input is of type String, are strings of any length allowed? If so, start with the simplest case (i.e., the empty string), and work your way up. Maybe the empty string needs to be handled one way, and strings of length 1 or 2 must be handled a different way (but the same way as each other), and strings of length greater than 2 must be handled in yet a different way (but the same as each other).
 
 ## Java String substring method
-```public String substring(int beginIndex,
+```
+public String substring(int beginIndex,
                   int endIndex)
 ```
 > Returns a new string that is a substring of this string. The substring begins at the specified `beginIndex` and extends to the character at index `endIndex - 1`. Thus, the length of the substring is `endIndex-beginIndex`.
