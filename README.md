@@ -41,6 +41,10 @@ Every class has the general structure
 1. Package declaration: tells the compiler which package this class belongs to
 2. Import statement(s): tells the compiler where to find types that belong to other packages (i.e., packages outside this class's package)
 3. Class header and body
+
+## When import statements are needed
+Types located outside the current class's package (exception: `java.lang` package).
+
 ## Compiling
 Important points to keep in mind:
 * `javac` is run from just outside the package directory. For example, from here:
