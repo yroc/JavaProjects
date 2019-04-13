@@ -199,9 +199,19 @@ To make this right, you must either make `fibonacciSequence()` static, or else i
 ## Categorizing the input
 When creating a program, a useful tip is to categorize the input into a finite number cases. Think about the input systematically (i.e., in order). For example, if the input is of type String, are strings of any length allowed? If so, start with the simplest case (i.e., the empty string), and work your way up. Maybe the empty string needs to be handled one way, and strings of length 1 or 2 must be handled a different way (but the same way as each other), and strings of length greater than 2 must be handled in yet a different way (but the same as each other).
 
-## Java String substring method
+## Java String substring method, length of substring
 ```
 public String substring(int beginIndex,
                   int endIndex)
 ```
 > Returns a new string that is a substring of this string. The substring begins at the specified `beginIndex` and extends to the character at index `endIndex - 1`. Thus, the length of the substring is `endIndex-beginIndex`.
+
+Question: How do they get the length to be `endIndex-beginIndex`?
+
+First, note that the general length formula for a string is `j - (i - 1)`, where `i` is the index of the initial character of the string and `j` is the index of the final character of the string. Why is this the general string formula? Because `i` and `j` are both included in the string (length is all the characters in the string, including both the initial and final characters). The subtrahend is thus `i - 1` because we don't want to subtract `i` itself (it needs to be included); we want to subtract the character *before* `i` (i.e., `i - 1`).
+
+Next, note that `substring(beginIndex, endIndex)` is defined such that `beginIndex` specifies the index of the initial character of the returned substring, and `endIndex` specifies the index of the character *immediately succeeding* the final character of the returned substring. Thus, the index of the final character of the returned substring is `endIndex - 1`.
+
+Finally then, the length of the returned substring is `(endIndex - 1) - (beginIndex - 1)`, which simplifies to `endIndex - beginIndex`.
+
+An important consequence is that if `beginIndex = endIndex`, the length of the returned substring is `0` (i.e., the returned substring is the empty string).
