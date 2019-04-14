@@ -231,3 +231,16 @@ An important consequence is that if `beginIndex = endIndex`, the length of the r
 
 ## Linux create a new (empty) file
 <code>touch <var>filename</var></code>
+
+## Unzipping a `tar.gz` file
+`tar -xvzf example.tar.gz`
+
+## Viewing Java API source code
+There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
+
+1. If necessary, download the Java JDK gzip from Oracle (e.g., `jdk-11.0.2_linux-x64_bin.tar.gz`)
+2. Extract the downloaded `tar.gz` file to a convenient place (e.g., `~/`)
+3. `cd` to `~/jdk-11.0.2/lib/`, where you should find `src.zip`—the archive that contains the source code for the Java platform
+4. Unzip `src.zip`. This will create a several dozen directories that begin with either `java` or `jdk`.
+5. `cd` to `java.base/`, which contains the package namespace directory `java/lang` (corresponding to the package name `java.lang`)
+6. `cd` to `java/lang/`. There you will find all of the Java API types in the `java.lang` package, including `String.java`, `StringBuilder.java`, `Object.java`, `Math.java`, `System.java`, and `Comparable.java`.
