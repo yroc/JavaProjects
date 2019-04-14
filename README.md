@@ -215,3 +215,12 @@ Next, note that `substring(beginIndex, endIndex)` is defined such that `beginInd
 Finally then, the length of the returned substring is `(endIndex - 1) - (beginIndex - 1)`, which simplifies to `endIndex - beginIndex`.
 
 An important consequence is that if `beginIndex = endIndex`, the length of the returned substring is `0` (i.e., the returned substring is the empty string).
+
+`public String substring(int beginIndex, int endIndex)`
+
+Returns the string composed of character(s) from index `beginIndex` up to but excluding the character at the index immediately preceding the integer `endIndex`.
+
+Examples:
+* `str.substring(0,6)` returns the string in `str` from characters 0 to 6, excluding 6 (namely, the characters from indeces 0 through 5 inclusive).
+* `str.substring(1,2)` returns the string in `str` from characters 1 to 2, excluding 2 (namely, the character at index 1)
+* `str.substring(1,1)` returns the string in `str` from characters 1 to 1, excluding 1 (namely, the empty string)
