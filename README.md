@@ -230,4 +230,4 @@ An important consequence is that if `beginIndex = endIndex`, the length of the r
 `java --version`
 
 ## Linux create a new (empty) file
-`touch *filename*`
+<code>touch <var>filename</var></code>
