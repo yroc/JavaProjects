@@ -206,21 +206,21 @@ public String substring(int beginIndex,
 ```
 > Returns a new string that is a substring of this string. The substring begins at the specified `beginIndex` and extends to the character at index `endIndex - 1`. Thus, the length of the substring is `endIndex-beginIndex`.
 
-Question: How do they get the length to be `endIndex-beginIndex`?
+**Question**: What if `endIndex` is out of bounds, as would be the case if the substring to be returned extended right to the end of this string (e.g., if this string is `"command"`, then `endIndex` would have to be 7 to return a substring that included the `d` at the end).
 
-First, note that the general length formula for a string is `j - (i - 1)`, where `i` is the index of the initial character of the string and `j` is the index of the final character of the string. Why is this the general string formula? Because `i` and `j` are both included in the string (length is all the characters in the string, including both the initial and final characters). The subtrahend is thus `i - 1` because we don't want to subtract `i` itself (it needs to be included); we want to subtract the character *before* `i` (i.e., `i - 1`).
+**Answer**: `endIndex` need not be interpreted as an index at all (perhaps the parameter name `endIndex` is misleading in this case). Here's a rephrasing of the method's description: "Returns the string composed of character(s) from index `beginIndex` up to but excluding the character at the index immediately preceding the integer `endIndex`."
+
+Examples:
+* `str.substring(0,6)` returns the string in `str` from characters 0 to 6, excluding 6 (namely, the characters from indeces 0 through 5 inclusive).
+* `str.substring(1,2)` returns the string in `str` from characters 1 to 2, excluding 2 (namely, the character at index 1)
+* `str.substring(1,1)` returns the string in `str` from characters 1 to 1, excluding 1 (namely, the empty string)
+
+**Question**: How do they get the length to be `endIndex-beginIndex`?
+
+**Answer**: First, note that the general length formula for a string is `j - (i - 1)`, where `i` is the index of the initial character of the string and `j` is the index of the final character of the string. Why is this the general string formula? Because `i` and `j` are both included in the string (length is all the characters in the string, including both the initial and final characters). The subtrahend is thus `i - 1` because we don't want to subtract `i` itself (it needs to be included); we want to subtract the character *before* `i` (i.e., `i - 1`).
 
 Next, note that `substring(beginIndex, endIndex)` is defined such that `beginIndex` specifies the index of the initial character of the returned substring, and `endIndex` specifies the index of the character *immediately succeeding* the final character of the returned substring. Thus, the index of the final character of the returned substring is `endIndex - 1`.
 
 Finally then, the length of the returned substring is `(endIndex - 1) - (beginIndex - 1)`, which simplifies to `endIndex - beginIndex`.
 
 An important consequence is that if `beginIndex = endIndex`, the length of the returned substring is `0` (i.e., the returned substring is the empty string).
-
-`public String substring(int beginIndex, int endIndex)`
-
-Returns the string composed of character(s) from index `beginIndex` up to but excluding the character at the index immediately preceding the integer `endIndex`.
-
-Examples:
-* `str.substring(0,6)` returns the string in `str` from characters 0 to 6, excluding 6 (namely, the characters from indeces 0 through 5 inclusive).
-* `str.substring(1,2)` returns the string in `str` from characters 1 to 2, excluding 2 (namely, the character at index 1)
-* `str.substring(1,1)` returns the string in `str` from characters 1 to 1, excluding 1 (namely, the empty string)
