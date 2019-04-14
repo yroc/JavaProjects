@@ -155,7 +155,7 @@ For subsequent pushes (uploads), you only need `git push`
 Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
 
 ## Renaming a file in Git
-`git mv FibonacciSequence.java SequenceGenerator.java
+`git mv FibonacciSequence.java SequenceGenerator.java`
 
 ## Example of error, “Non-static method cannot be referenced from a static context”
 Trying to run this code gives the “non-static” error:
@@ -224,3 +224,10 @@ Next, note that `substring(beginIndex, endIndex)` is defined such that `beginInd
 Finally then, the length of the returned substring is `(endIndex - 1) - (beginIndex - 1)`, which simplifies to `endIndex - beginIndex`.
 
 An important consequence is that if `beginIndex = endIndex`, the length of the returned substring is `0` (i.e., the returned substring is the empty string).
+
+## Java check version
+
+`java --version`
+
+## Linux create a new (empty) file
+`touch *filename*`
