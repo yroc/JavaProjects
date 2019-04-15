@@ -242,5 +242,9 @@ There's nothing magical about the Java API source files (e.g., `String.java`)—
 2. Extract the downloaded `tar.gz` file to a convenient place (e.g., `~/`)
 3. `cd` to `~/jdk-11.0.2/lib/`, where you should find `src.zip`—the archive that contains the source code for the Java platform
 4. Unzip `src.zip`. This will create a several dozen directories that begin with either `java` or `jdk`.
-5. `cd` to `java.base/`, which contains the package namespace directory `java/lang` (corresponding to the package name `java.lang`)
+5. `cd` to `java.base/`, which contains the package namespace directory `java/lang/` (corresponding to the package name `java.lang`)
 6. `cd` to `java/lang/`. There you will find all of the Java API types in the `java.lang` package, including `String.java`, `StringBuilder.java`, `Object.java`, `Math.java`, `System.java`, and `Comparable.java`.
+
+## Emacs: scroll other window
+`C-M-v` (scroll up)\
+`C-M-S-v` (scroll down)
