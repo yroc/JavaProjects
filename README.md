@@ -248,3 +248,6 @@ There's nothing magical about the Java API source files (e.g., `String.java`)—
 ## Emacs: scroll other window
 `C-M-v` (scroll up)\
 `C-M-S-v` (scroll down)
+
+## Separate `if`s vs `if-else`
+The basic difference is that with separate `if` blocks, there is the possibility that each block may run (in case each condition is true). Whereas with an `if-else` block, only one subblock can run (regardless of whether or not more than one condition is true). For an example, try writing the `fizzBuzz()` method.

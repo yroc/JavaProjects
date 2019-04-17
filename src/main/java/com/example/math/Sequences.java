@@ -1,10 +1,17 @@
-package com.mathcomputers.math;
+package com.example.math;
 
 import java.lang.System;
 
+/** Sequences is a math class that encapsulates methods that generate
+ * various mathematical sequences
+ */
+
 public class Sequences
 {
-    public static void fibonacciSequence()
+    /** Prints out the first 20 terms of the Fibonacci sequence
+     * (assume the initial two elements in the sequence are both 1.
+     */
+    public static void fibonacci()
     {
 	int i_2 = 1;		// The (i - 2)th term
 	int i_1 = 1;		// The (i - 1)th term
@@ -30,6 +37,6 @@ public class Sequences
     public static void main(String[] arguments)
     {
 	
-	Sequences.fibonacciSequence();
+	Sequences.fibonacci();
     }
 }
