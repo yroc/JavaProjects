@@ -1,9 +1,3 @@
-# App List
-1. `BankAccount`
-2. `FizzBuzz`
-3. `FibonacciSequence`
-4. `Addends`
-
 # Concepts Summary
 ## App design
 From a *requirements document* (specifies what the app is required to do), it's up to you the programmer to determine what class(es) are needed to make the app—no one's going to tell you how to organize the code, certainly not your customer (who knows nothing about programming)!
@@ -15,13 +9,13 @@ Here are some general points to keep in mind when designing an app:
 * There's no rule that apps must mirror real life; if it's convenient and logical to encapsulate the deposit and withdraw mechanisms (methods) as part of the ”bank account”, then do it. If you can think of something better, then do that.
 
 ## Where to save source code?
-*Not* directly in the project folder! Example where to place the BankAccount.java file:
+*Not* directly in the project folder! Example where to place the MathGames.java file:
 
-`~/JavaProjects/src/main/java/com/mathcomputers/math/finance/`
+`~/JavaProjects/src/main/java/com/example/math/`
 
 * `src/main/java/` follows the *Gradle* standard.
-* `com/mathcomputers` is the reverse domain portion of the directory—its purpose is to provide a namespace for the package name.
-* `math/finance` is the actual package directory.
+* `com/example` is the reverse domain portion of the directory—its purpose is to provide a namespace for the package name.
+* `math/` is the actual package directory.
 * Make nested directories in *Emacs* with `M-x make-directory`
 * Or, from the shell, using `mkdir --parents`
 * Check that the directory hierarchy was successfully created with `ls -R`
@@ -53,7 +47,7 @@ Important points to keep in mind:
 
   Not from where the actual source file is located. For example, *not* from here:
 
-  `JavaProjects/src/main/java/com/mathcomputers/math/finance/`
+  `JavaProjects/src/main/java/com/example/math/`
 
   Reason being, the package declaration (in the source file) tells the compiler to look for the source files in the directory hierarchy `com/mathcomputers/math/finance` *relative to the current directory*.
 * Another consideration is separating source code from compiled code. Do this by creating a separate `bin` directory branch. For example:
@@ -62,16 +56,16 @@ Important points to keep in mind:
 
   Then, to tell `javac` to put its output in the “bin branch”, use the `-d` option (“directory”). For example:
 
-  `javac -d ~/JavaProjects/bin/main/java/ com/mathcomputers/math/finance/BankAccount.java`
+  `javac -d ~/JavaProjects/bin/main/java/ com/example/math/MathGames.java`
 
 ## Running an app
 Again, navigate to just outside the package directory. For example, from here:
 
-`bin/src/java/`
+`bin/main/java/`
 
 Use the package name, not the filename:
 
-`java com.mathcomputers.math.finance.BankAccount`
+`java com.example.math.MathGames`
 
 ## Placing an app under Git verison control
 ### Check Git installation
@@ -155,14 +149,14 @@ For subsequent pushes (uploads), you only need `git push`
 Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
 
 ## Renaming a file in Git
-`git mv FibonacciSequence.java SequenceGenerator.java`
+`git mv Sequences.java MathSequenceGenerator.java`
 
 ## Example of error, “Non-static method cannot be referenced from a static context”
 Trying to run this code gives the “non-static” error:
 ```java
-public class Sequences
+public class MathSequenceGenerator
 {
-    public void fibonacciSequence()
+    public void fibonacci()
     {
 	int i_2 = 1;		// The (i - 2)th term
 	int i_1 = 1;		// The (i - 1)th term
@@ -188,7 +182,7 @@ public class Sequences
     public static void main(String[] arguments)
     {
 	
-	fibonacciSequence();
+	fibonacci();
     }
 }
 ```
