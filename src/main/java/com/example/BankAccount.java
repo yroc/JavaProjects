@@ -1,4 +1,4 @@
-package com.mathcomputers.math.finance;
+package com.example;
 
 import java.lang.System;
 

@@ -6,7 +6,7 @@ import java.lang.System;
  * various mathematical sequences
  */
 
-public class Sequences
+public class MathSequenceGenerator
 {
     /** Prints out the first 20 terms of the Fibonacci sequence
      * (assume the initial two elements in the sequence are both 1.

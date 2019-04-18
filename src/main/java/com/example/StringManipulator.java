@@ -1,6 +1,6 @@
-package com.mathcomputers;
+package com.example;
 
-import java.lang.*;
+import java.lang.String;
 
 /** A class that encapsulates a collection of string manipulation methods */
 
