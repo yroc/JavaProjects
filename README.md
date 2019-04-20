@@ -238,7 +238,7 @@ To extract and decompress a `.tar.gz` file, do:
 
 * `x` (required), means extract. This option is required because `tar` also archives files, and you need to tell it which of the two operations you want it to do.
 * `v` (optional), means "be verbose".
-* `f` (required, must be last), means, "Operate on the given file". This option is required because `tar` is programmed to operate on a "default" file if a file is not specified (https://www.gnu.org/software/tar/manual/tar.html#SEC14)
+* `f` (required, must be last), means, "Operate on the given file". This option is required because `tar` is programmed to operate on a "default" file if a file is not specified (see https://www.gnu.org/software/tar/manual/tar.html#SEC14 for more detail)
 
 Note that you can also include the command option `z`, which tells `tar` to decompress the file using `gzip`, but `tar` is programmed to automatically decompress the given file using `gzip` when the given file extension is `.gz`.
 
