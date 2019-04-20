@@ -229,6 +229,8 @@ An important consequence is that if `beginIndex = endIndex`, the length of the r
 ## Unzipping a `tar.gz` file
 `tar -xvzf example.tar.gz`
 
+Do `man tar` to learn what these `tar` command options do.
+
 ## Viewing Java API source code
 There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
 
