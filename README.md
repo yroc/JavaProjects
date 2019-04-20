@@ -52,7 +52,7 @@ When compiling a source file, you need to tell `javac` the source file's *projec
 
 * Another consideration is separating source code from compiled code. Do this by creating a separate `bin` directory branch. For example:
 
-  ~/JavaProjects/bin/main/java/
+  `~/JavaProjects/bin/main/java/`
 
   Then, to tell `javac` to put its output in the “bin branch”, use the `-d` option (“directory”). For example:
 
@@ -80,7 +80,7 @@ git config --global core.editor "emacs -nw"
 
 * These commands edit the config file.
   * The *global* config file is located at `~/.gitconfig`.
-  * *Local* (i.e., project specific) config files are called `config` and located in the `.git/` directory inside each project directory.
+  * *Local* (i.e., project specific) config files are called `config` and located in the `.git/` directory of each project.
 
 ### Creating a Git repository for a project
 Directly within the project directory, enter the command `git init` (this creates the `.git/` directory—the repository).
