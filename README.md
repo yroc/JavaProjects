@@ -226,8 +226,21 @@ An important consequence is that if `beginIndex = endIndex`, the length of the r
 ## Linux create a new (empty) file
 <code>touch <var>filename</var></code>
 
-## Unzipping a `tar.gz` file
-`tar -xvzf example.tar.gz`
+## Extracting and decompressing a `tar.gz` file
+### Background
+A `.tar` file is a "container" file that groups two or more separate files into a single unified file (called an *archive* file, with extension `.tar`). The Linux program that does this is called `tar`. But as a user, you're more likely to be *extracting* members of an archive file than creating archive files.
+
+In addition to archiving files, it is common to *compress* the newly-created archive to save space (especially important when sending files over a network). The most common Linux program for doing this is `gzip`. You can easily tell that an archived file has been compressed with `gzip` because it has the extension `.gz` (e.g., `example.tar.gz`).
+
+To extract and decompress a `.tar.gz` file, do:
+
+`tar -xvf example.tar.gz`
+
+* `x` means *extract* the specified archive. This option is needed because `tar` also archives files.
+* `v` means "be verbose"
+* `f` tells `tar` to operate on (in this case, extract) the specified file
+
+Note that you can also include the command option `z`, which tells `tar` to decompress the file using `gzip`, but `tar` is programmed to automatically decompress the given file using `gzip` when the given file extension is `.gz`.
 
 Do `man tar` to learn what these `tar` command options do.
 
