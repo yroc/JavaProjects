@@ -49,7 +49,7 @@ Important points to keep in mind:
 
   `JavaProjects/src/main/java/com/example/math/`
 
-  Reason being, the package declaration (in the source file) tells the compiler to look for the source files in the directory hierarchy `com/example/math/` *relative to the current directory*.
+  Reason being, the package declaration (in the source file) tells `javac` to look for the source files in the directory hierarchy `com/example/math/` *relative to the current directory*.
 * Another consideration is separating source code from compiled code. Do this by creating a separate `bin` directory branch. For example:
 
   ~/JavaProjects/bin/main/java/
