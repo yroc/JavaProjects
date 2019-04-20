@@ -40,6 +40,16 @@ Every class has the general structure
 Types located outside the current class's package (exception: `java.lang` package).
 
 ## Compiling
+### The "location" of source (`.java`) files
+The location of a source file is important because when you wish to compile the source file (using `javac`), `javac` needs to know where it's located. You specify the location using the `-classpath` option.
+
+`javac -classpath <var>source_file_location</var> <var>source_file_name</var>`
+
+However, with respect to source files, there are two types of locations: *project* and *package*. Every source file is located in some project directory (e.g., `~/JavaProjects/src/main/java/`). Then within that project location, the source file is located within a package directory (e.g., `com/example/math/`). As an analogy, think of an object located in a room (project location), and then within that room, it may be located within a particular box (package location).
+
+When you compile a source file (using `javac`), you need to tell the compiler the source file's *project* location, but not its package location. In other words
+
+
 Important points to keep in mind:
 * `javac` is run from just outside the package directory. For example, from here:
 
