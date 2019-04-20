@@ -40,26 +40,16 @@ Every class has the general structure
 Types located outside the current class's package (exception: `java.lang` package).
 
 ## Compiling
-### The "location" of source (`.java`) files
-The location of a source file is important because when you wish to compile the source file (using `javac`), `javac` needs to know where it's located. You specify the location using the `-classpath` option.
+### Establishing the source (`.java`) file's location
+A source file's location is important because when you wish to compile it (using `javac`), `javac` needs to know where it's located. You specify a source file's location to `javac` using its `-classpath` option.
 
 <code>javac -classpath *source_file_location* *source_file_name*</code>
 
-However, with respect to source files, there are two types of locations: *project* and *package*. Every source file is located in some project directory (e.g., `~/JavaProjects/src/main/java/`). Then within that project location, the source file is located within a package directory (e.g., `com/example/math/`). As an analogy, think of an object located in a room (project location), and then within that room, it may be located within a particular box (package location).
+However, with respect to source files, there are two types of locations: *project* and *package*. Every source file is located in some project directory (e.g., `~/JavaProjects/src/main/java/`). Then within that project directory, the source file is located within a package directory (e.g., `com/example/math/`). Overall, its precise location is `~/JavaProject/src/main/java/com/example/math/`. As an analogy, think of an object located in a room (project location), and then within that room, it may be located within a particular box (package location).
 
-When you compile a source file (using `javac`), you need to tell the compiler the source file's *project* location, but not its package location. In other words
+When compiling a source file, you need to tell `javac` the source file's *project* location, but not its package location (`javac` is programmed to expect the project location). Reason being, the source file's package location is available to `javac` via the *package declaration* in the source file code itself.
 
 
-Important points to keep in mind:
-* `javac` is run from just outside the package directory. For example, from here:
-
-  `JavaProjects/src/main/java/`
-
-  Not from where the actual source file is located. For example, *not* from here:
-
-  `JavaProjects/src/main/java/com/example/math/`
-
-  Reason being, the package declaration (in the source file) tells `javac` to look for the source files in the directory hierarchy `com/example/math/` *relative to the current directory*.
 * Another consideration is separating source code from compiled code. Do this by creating a separate `bin` directory branch. For example:
 
   ~/JavaProjects/bin/main/java/
