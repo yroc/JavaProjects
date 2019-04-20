@@ -236,13 +236,11 @@ To extract and decompress a `.tar.gz` file, do:
 
 `tar -xvf example.tar.gz`
 
-* `x` means *extract* the specified archive. This option is needed because `tar` also archives files.
-* `v` means "be verbose"
-* `f` tells `tar` to operate on (in this case, extract) the specified file
+* `x` (required), means extract. This option is required because `tar` also archives files, and you need to tell it which of the two operations you want it to do.
+* `v` (optional), means "be verbose".
+* `f` (required, must be last), means, "Operate on the given file". This option is required because `tar` is programmed to operate on a "default" file if a file is not specified (https://www.gnu.org/software/tar/manual/tar.html#SEC14)
 
 Note that you can also include the command option `z`, which tells `tar` to decompress the file using `gzip`, but `tar` is programmed to automatically decompress the given file using `gzip` when the given file extension is `.gz`.
-
-Do `man tar` to learn what these `tar` command options do.
 
 ## Viewing Java API source code
 There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
