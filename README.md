@@ -30,7 +30,7 @@ A grouping of related classes and/or interfaces
 * Organizing types into logical categories makes it easier for the programmer and client to find them
 * Provies a namespace to prevent class naming conflicts
 * A means of access control (e.g., if a member of a class is `protected`, then it can be invoked/accessed within the package but not outside the package)
-##Source file structure
+## Source file structure
 Every class has the general structure
 1. Package declaration: tells the compiler which package this class belongs to
 2. Import statement(s): tells the compiler where to find types that belong to other packages (i.e., packages outside this class's package)
