@@ -151,6 +151,9 @@ Each Git repository has at least one `README.md` file. Each subdirectory in the 
 ## Renaming a file in Git
 `git mv Sequences.java MathSequenceGenerator.java`
 
+## Download and integrate remote changes (e.g., from Github.com)
+`git pull`
+
 ## Example of error, “Non-static method cannot be referenced from a static context”
 Trying to run this code gives the “non-static” error:
 ```java
