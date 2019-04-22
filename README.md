@@ -40,32 +40,61 @@ Every class has the general structure
 Types located outside the current class's package (exception: `java.lang` package).
 
 ## Compiling
-### Establishing the source (`.java`) file's location
-A source file's location is important because when you wish to compile it (using `javac`), `javac` needs to know where it's located. You specify a source file's location to `javac` using its `-classpath` option.
+Compiling is done by the JDK tool `javac`. Description:
 
-<code>javac -classpath *source_file_location* *source_file_name*</code>
+> The `javac` tool reads class and interface definitions, written in the Java programming language, and compiles them into bytecode class files.
 
-However, with respect to source files, there are two types of locations: *project* and *package*. Every source file is located in some project directory (e.g., `~/JavaProjects/src/main/java/`). Then within that project directory, the source file is located within a package directory (e.g., `com/example/math/`). Overall, its precise location is `~/JavaProject/src/main/java/com/example/math/`. As an analogy, think of an object located in a room (project location), and then within that room, it may be located within a particular box (package location).
+Taking the example of the `MathGames.java` source file in the `com.example.math` package, and assuming the working directory is the project directory `~/JavaProjects/`, the compile command would be:
 
-When compiling a source file, you need to tell `javac` the source file's *project* location, but not its package location (`javac` is programmed to expect the project location). Reason being, the source file's package location is available to `javac` via the *package declaration* in the source file code itself.
+`javac -d bin/main/java/ src/main/java/com/example/math/MathGames.java`
 
+The `-d` option specifies the directory to put the compiled (`.class`) file. Note that source (`.java`) files should be located in `src/main/java/`, and compiled files in `bin/main/java/` as per the *Gradle* standard. If `bin/main/java` doesn't exist, it must be created first:
 
-* Another consideration is separating source code from compiled code. Do this by creating a separate `bin` directory branch. For example:
+`mkdir --parents bin/main/java/`
 
-  `~/JavaProjects/bin/main/java/`
+or, from *Emacs*,
 
-  Then, to tell `javac` to put its output in the “bin branch”, use the `-d` option (“directory”). For example:
+`M-x make-directory RET bin/main/java/`
 
-  `javac -d ~/JavaProjects/bin/main/java/ com/example/math/MathGames.java`
+Also note that the compiled file will be placed at location
 
-## Running an app
-Again, navigate to just outside the package directory. For example, from here:
+`bin/main/java/com/example/math/`
+
+not
 
 `bin/main/java/`
 
-Use the package name, not the filename:
+even though the package directory hierarchy is not specified after the `-d` option. This is because `javac` is programmed to do this (it knows the package hierarchy from the *package declaration* in the source file).
 
-`java com.example.math.MathGames`
+### Verbose compile
+To get a better idea of what `javac` is doing when it compiles (including each class that's loaded), use the `-verbose` option:
+
+`javac -d bin/main/java/ -verbose src/main/java/com/example/math/MathGames.java`
+
+### Enable all warnings
+`javac -d bin/main/java -Xlint src/main/java/com/example/math.MathGames.java`
+
+## Running an app
+`.class` files are run by the *Java launcher* `java`. Assuming the working directory is `~/JavaProjects/`, then `MathGames.class` is run with:
+
+`java bin/main/java/ com.example.math.MathGames`
+
+A couple of things to note:
+* When specifying the location of `MathGames.class`, `java` is programmed to expect its “project” location, i.e.,
+
+  `bin/main/java/`
+
+  *not* its “package” location, i.e., not:
+
+  `bin/main/java/com/example/math`
+
+* When specifying the object to be run, `java` is programmed to expect the object's fully qualified name, i.e.,
+
+  `com.example.math.MathGames`
+
+  *not* the object's fully qualified filename i.e., not
+
+  `bin/main/java/com/example/math/MathGames.class`
 
 ## Placing an app under Git verison control
 ### Check Git installation
@@ -89,7 +118,7 @@ Directly within the project directory, enter the command `git init` (this create
 `git status`
 
 ### Ignoring files
-You want to ignore all compiled files (`.class` in the case of Java). Git will ignore (not track) all files identified in a file called `.gitignore` (you create this file yourself just inside the project directory:
+you want to ignore all compiled files (`.class` in the case of Java). Git will ignore (not track) all files identified in a file called `.gitignore` (you create this file yourself just inside the project directory:
 
 `emacs -nw .gitignore`
 
