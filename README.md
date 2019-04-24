@@ -1,4 +1,10 @@
 # Concepts Summary
+## Programming, general
+### Categorizing the input
+When creating a program, a useful tip is to categorize the input into a finite number cases. Think about the input systematically (i.e., in order). For example, if the input is of type String, are strings of any length allowed? If so, start with the simplest case (i.e., the empty string), and work your way up. Maybe the empty string needs to be handled one way, and strings of length 1 or 2 must be handled a different way (but the same way as each other), and strings of length greater than 2 must be handled in yet a different way (but the same as each other).
+### Using `if`, `if`, `if`, … vs `if`, `else-if`, `else-if`, …
+The basic difference is that with separate `if` blocks, there is the possibility that each block may run (in case each condition is true). Whereas with an `if-else` block, only one subblock can run (regardless of whether or not more than one condition is true). For an example, try writing the `fizzBuzz()` method.
+
 ## Object orientation
 ### App design
 From a *requirements document* (specifies what the app is required to do), it's up to you the programmer to determine what class(es) are needed to make the app—no one's going to tell you how to organize the code, certainly not your customer (who knows nothing about programming)!
@@ -83,7 +89,7 @@ $ cd ~/JavaProjects/bin/main/java/
 $ java com.example.math.MathGames
 ```
 #### Some explanatory notes
-* `java` is programmed to expect a class's *name* as its argument, not a class's filepath (location). This is why you need the `-cp` option to specify the class's location and can't just run a class like this:
+* `java` is programmed to expect a class's proper name as its argument, not its pathname (location). That's why you need the `-cp` option to specify the class's location and can't just run a class like this:
 
   `java ~/JavaProjects/bin/main/java/com/example/math/MathGames.class`
 
@@ -97,98 +103,11 @@ $ java com.example.math.MathGames
   `-cp ~/JavaProjects/bin/main/java/com/example/math/`
 * It's not enough to tell `java` which class to run; it must also be told *where* to look for it. One way to do this is with the `-cp` option explained above. Another way is via the environmental variable `CLASSPATH`, which represents a list of pathnames (locations) for `java` to search. `java` will search—and only search—the locations specified by `CLASSPATH`; if the given class is not located in one of the directories specified in `CLASSPATH`, then `java` will complain that it couldn't find the class and won't run it.
 
-  By default, `CLASSPATH` is set to the working directory only. This is why `cd`ing directly to a class's location (e.g., `~/JavaProjects/bin/main/java/`) allows `java` to find the class even if the `cp` option isn't used.
+  By default, `CLASSPATH` is set to the working directory only. This is why `cd`ing directly to a class's location (e.g., `~/JavaProjects/bin/main/java/`) allows `java` to find the class even if the `-cp` option isn't used.
 
-  **Note**: It is considered bad practice to set `CLASSPATH`. It is recommended to always use `-cp`.
-## Git
-### Placing an app under Git verison control
-#### Check Git installation
-`git --version`
+  **Note**: It is considered bad practice to set `CLASSPATH` and rely on it. It is recommended to leave `CLASSPATH` alone and to always use `-cp`.
 
-### Configure Git
-```
-git config --global user.name John Doe
-git config --global user.email johndoe@gmail.com
-git config --global core.editor "emacs -nw"
-```
-
-* These commands edit the config file.
-  * The *global* config file is located at `~/.gitconfig`.
-  * *Local* (i.e., project specific) config files are called `config` and located in the `.git/` directory of each project.
-
-### Creating a Git repository for a project
-Directly within the project directory, enter the command `git init` (this creates the `.git/` directory—the repository).
-
-### View the current status
-`git status`
-
-### Ignoring files
-you want to ignore all compiled files (`.class` in the case of Java). Git will ignore (not track) all files identified in a file called `.gitignore` (you create this file yourself just inside the project directory:
-
-`emacs -nw .gitignore`
-
-To ignore `.class` files, you can do either:
-
-```
-# Compiled class files
-*.class
-```
-
-or
-
-```
-# bin/ directory
-bin/
-```
-
-### Staging untracked files
-Examples:
-
-```
-git add .
-git add *.java
-git add README.md
-```
-
-### Committing files to the repository
-#### Commit with a one-line commit message
-For example, committing a new file:
-
-`git commit -m "Initialize"`
-
-#### Commit with a subject and body commit message
-When you need to explain the change in more detail. The format is like an email; the subject *summarizes*  what you've done, while the body describes in more detail what you've done *and* explains *why* you've done it (but not how you've done it—leave the “how” out of it).
-
-Summary of Chris Beams' Git commit message rules:
-Subject line: Separate subject from body with a blank line, limit to 50 chars, sentence case, don't  end with a period, imperative mood.
-Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are OK (use dash or asterisk as bullet).
-
-* To wrap at 72 characters, use `C-x f` to set fill-column width, and `M-q` to fill a paragraph.
-
-### Transfering project to Github (remote repository)
-#### Create a new remote repository
-1. Sign into github.com
-2. Look for a “New” button (as in, create a new repository)
-3. Pick a repository name (e.g., `JavaProjects`) and a description (e.g., `A collection of Java projects for practice.`
-
-#### Establish a connection between the local and remote repository
-`git remote add origin https://github.com/yroc/JavaProjects.git`
-
-#### Upload local repository
-`git push -u origin master`
-
-For subsequent pushes (uploads), you only need `git push`
-
-## Add a README.md
-Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
-
-## Renaming a file in Git
-`git mv Sequences.java MathSequenceGenerator.java`
-
-## Download and integrate remote changes (e.g., from Github.com)
-`git pull`
-
-## Example of error, “Non-static method cannot be referenced from a static context”
+### Error: “Non-static method cannot be referenced from a static context”
 Trying to run this code gives the “non-static” error:
 ```java
 public class MathSequenceGenerator
@@ -227,10 +146,7 @@ Why? Because in the `main` method, you're trying to invoke a *non-static* method
 
 To make this right, you must either make `fibonacciSequence()` static, or else instantiate a `Sequences` object and call `fibonacciSequence` on that object. But notice that `Sequences` has no constructor, and also notice that it has no attributes (no state), so it appears, at least for the time being, it makes sense to leave the class as a *utility* (static) class. In that case, just make `fibonacciSequence` static, and you're good to go!
 
-## Categorizing the input
-When creating a program, a useful tip is to categorize the input into a finite number cases. Think about the input systematically (i.e., in order). For example, if the input is of type String, are strings of any length allowed? If so, start with the simplest case (i.e., the empty string), and work your way up. Maybe the empty string needs to be handled one way, and strings of length 1 or 2 must be handled a different way (but the same way as each other), and strings of length greater than 2 must be handled in yet a different way (but the same as each other).
-
-## Java String substring method, length of substring
+### String substring method, length of substring
 ```
 public String substring(int beginIndex,
                   int endIndex)
@@ -256,30 +172,10 @@ Finally then, the length of the returned substring is `(endIndex - 1) - (beginIn
 
 An important consequence is that if `beginIndex = endIndex`, the length of the returned substring is `0` (i.e., the returned substring is the empty string).
 
-## Java check version
-
+### Java check version
 `java --version`
 
-## Linux create a new (empty) file
-<code>touch <var>filename</var></code>
-
-## Extracting and decompressing a `tar.gz` file
-### Background
-A `.tar` file is a "container" file that groups two or more separate files into a single unified file (called an *archive* file, with extension `.tar`). The Linux program that does this is called `tar`. But as a user, you're more likely to be *extracting* members of an archive file than creating archive files.
-
-In addition to archiving files, it is common to *compress* the newly-created archive to save space (especially important when sending files over a network). The most common Linux program for doing this is `gzip`. You can easily tell that an archived file has been compressed with `gzip` because it has the extension `.gz` (e.g., `example.tar.gz`).
-
-To extract and decompress a `.tar.gz` file, do:
-
-`tar -xvf example.tar.gz`
-
-* `x` (required), means extract. This option is required because `tar` also archives files, and you need to tell it which of the two operations you want it to do.
-* `v` (optional), means "be verbose".
-* `f` (required, must be last), means, "Operate on the given file". This option is required because `tar` is programmed to operate on a "default" file if a file is not specified (see https://www.gnu.org/software/tar/manual/tar.html#SEC14 for more detail)
-
-Note that you can also include the command option `z`, which tells `tar` to decompress the file using `gzip`, but `tar` is programmed to automatically decompress the given file using `gzip` when the given file extension is `.gz`.
-
-## Viewing Java API source code
+### Viewing Java API source code
 There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
 
 1. If necessary, download the Java JDK gzip from Oracle (e.g., `jdk-11.0.2_linux-x64_bin.tar.gz`)
@@ -289,9 +185,111 @@ There's nothing magical about the Java API source files (e.g., `String.java`)—
 5. `cd` to `java.base/`, which contains the package namespace directory `java/lang/` (corresponding to the package name `java.lang`)
 6. `cd` to `java/lang/`. There you will find all of the Java API types in the `java.lang` package, including `String.java`, `StringBuilder.java`, `Object.java`, `Math.java`, `System.java`, and `Comparable.java`.
 
-## Emacs: scroll other window
+## Git
+### Check Git installation
+`git --version`
+### Placing an app under Git verison control
+#### Configure Git
+```shell
+$ git config --global user.name John Doe
+$ git config --global user.email johndoe@gmail.com
+$ git config --global core.editor "emacs -nw"
+```
+
+* These commands edit the *global* config file (located at `~/.gitconfig`).
+* There are also a *local* (viz., project specific) config files, called `config`, located in each project's `.git/` directory.
+
+#### Creating a Git repository for a project
+Directly within the project directory, enter the command `git init` (this creates the `.git/` directory—the repository).
+
+#### View the current status
+`git status`
+
+#### Ignoring files
+You want to ignore all compiled files (`.class` files in the case of Java). Git will ignore (not track) all files identified in a file called `.gitignore` (you create this file yourself just inside the project directory):
+
+`emacs -nw .gitignore`
+
+To ignore `.class` files, you can do either:
+
+```
+# Compiled class files
+*.class
+```
+
+or
+
+```
+# bin/ directory
+bin/
+```
+
+#### Staging untracked files
+Examples:
+
+```
+git add .
+git add *.java
+git add README.md
+```
+
+#### Committing files to the repository
+##### Commit with a one-line commit message
+For example, committing a new file:
+
+`git commit -m "Initialize"`
+
+##### Commit with a subject and body commit message
+When you need to explain the change in more detail. The format is like an email; the subject *summarizes*  what you've done, while the body describes in more detail what you've done *and* explains *why* you've done it (but not how you've done it—leave the “how” out of it).
+
+Summary of Chris Beams' Git commit message rules:
+Subject line: Separate subject from body with a blank line, limit to 50 chars, sentence case, don't  end with a period, imperative mood.
+Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are OK (use dash or asterisk as bullet).
+
+* To wrap at 72 characters, use `C-x f` to set fill-column width, and `M-q` to fill a paragraph.
+
+### Transfering project to Github (remote repository)
+#### Create a new remote repository
+1. Sign into github.com
+2. Look for a “New” button (as in, create a new repository)
+3. Pick a repository name (e.g., `JavaProjects`) and a description (e.g., `A collection of Java projects for practice.`
+
+#### Establish a connection between the local and remote repository
+`git remote add origin https://github.com/yroc/JavaProjects.git`
+
+#### Upload local repository
+`git push -u origin master`
+
+For subsequent pushes (uploads), you only need `git push`
+
+### Add a README.md
+Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
+
+### Renaming a file in Git
+`git mv Sequences.java MathSequenceGenerator.java`
+
+### Download and integrate remote changes (e.g., from Github.com)
+`git pull`
+
+## Linux
+### Create a new (empty) file
+<code>touch <var>filename</var></code>
+
+### Extracting and decompressing a `tar.gz` file
+A `.tar` file is a "container" file that groups two or more separate files into a single unified file (called an *archive* file, with extension `.tar`). The Linux program that does this is called `tar`. But as a user, you're more likely to be *extracting* members of an archive file than creating archive files.
+
+In addition to archiving files, it is common to *compress* the newly-created archive to save space (especially important when sending files over a network). The most common Linux program for doing this is `gzip`. You can easily tell that an archived file has been compressed with `gzip` because it has the extension `.gz` (e.g., `example.tar.gz`).
+#### Extract and decompress a `tar.gz` file
+
+`tar -xvf example.tar.gz`
+
+* `x` (required), means extract. This option is required because `tar` also archives files, and you need to tell it which of the two operations you want it to do.
+* `v` (optional), means "be verbose".
+* `f` (required, must be last), means, "Operate on the given file". This option is required because `tar` is programmed to operate on a "default" file if a file is not specified (see https://www.gnu.org/software/tar/manual/tar.html#SEC14 for more detail)
+
+Note that you can also include the command option `z`, which tells `tar` to decompress the file using `gzip`, but `tar` is programmed to automatically decompress the given file using `gzip` when the given file extension is `.gz`.
+
+## Emacs
+### Scroll other window
 `C-M-v` (scroll up)\
 `C-M-S-v` (scroll down)
-
-## Using `if`, `if`, `if`, … vs `if`, `else-if`, `else-if`, …
-The basic difference is that with separate `if` blocks, there is the possibility that each block may run (in case each condition is true). Whereas with an `if-else` block, only one subblock can run (regardless of whether or not more than one condition is true). For an example, try writing the `fizzBuzz()` method.
