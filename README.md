@@ -85,21 +85,21 @@ $ java com.example.math.MathGames
 #### Some explanatory notes
 * `java` is programmed to expect a class's *name* as its argument, not a class's filepath (location). This is why you need the `-cp` option to specify the class's location and can't just run a class like this:
 
- `java ~/JavaProjects/bin/main/java/com/example/math/MathGames.class`
+  `java ~/JavaProjects/bin/main/java/com/example/math/MathGames.class`
 
- Furthermore, `java` is programmed to expect the *fully qualified* class name (e.g., `com.example.math.MathGames`), not just the class's root name (e.g., `MathGames`).
+  Furthermore, `java` is programmed to expect the *fully qualified* class name (e.g., `com.example.math.MathGames`), not just the class's root name (e.g., `MathGames`).
 * When specifying the class's location with `-cp`, `java` is programmed to expect its location within the project *excluding* the “package” part of its location. That is, `java` expects:
 
- `-cp ~/JavaProjects/bin/main/java/`
+  `-cp ~/JavaProjects/bin/main/java/`
 
- not:
+  not:
 
- `-cp ~/JavaProjects/bin/main/java/com/example/math/`
+  `-cp ~/JavaProjects/bin/main/java/com/example/math/`
 * It's not enough to tell `java` which class to run; it must also be told *where* to look for it. One way to do this is with the `-cp` option explained above. Another way is via the environmental variable `CLASSPATH`, which represents a list of pathnames (locations) for `java` to search. `java` will search—and only search—the locations specified by `CLASSPATH`; if the given class is not located in one of the directories specified in `CLASSPATH`, then `java` will complain that it couldn't find the class and won't run it.
 
- By default, `CLASSPATH` is set to the working directory only. This is why `cd`ing directly to a class's location (e.g., `~/JavaProjects/bin/main/java/`) allows `java` to find the class even if the `cp` option isn't used.
+  By default, `CLASSPATH` is set to the working directory only. This is why `cd`ing directly to a class's location (e.g., `~/JavaProjects/bin/main/java/`) allows `java` to find the class even if the `cp` option isn't used.
 
- Note: It is considered bad practice to set `CLASSPATH`. It is recommended to always use `-cp`.
+  **Note**: It is considered bad practice to set `CLASSPATH`. It is recommended to always use `-cp`.
 ## Git
 ### Placing an app under Git verison control
 #### Check Git installation
