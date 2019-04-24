@@ -1,5 +1,6 @@
 # Concepts Summary
-## App design
+## Object orientation
+### App design
 From a *requirements document* (specifies what the app is required to do), it's up to you the programmer to determine what class(es) are needed to make the app—no one's going to tell you how to organize the code, certainly not your customer (who knows nothing about programming)!
 
 There are many ways to organize an app into classes. For example, does it make sense that a BankAccount class encapsulates the mechanism to deposit and withdraw? If we're trying to mirror the app to real life, isn't a bank account merely a *container* of money? But if not the BankAccount class, which entity actually performs the depositing and withdrawing? Perhaps a “Teller” class? But then again, everything is so mechanized these days—there's not much paper money, and tellers don't really do the *actual* depositing, do they? Isn't it all done by computers? So maybe some kind of Computer class? Well, not really specific enough. Hmm…
@@ -8,7 +9,8 @@ Here are some general points to keep in mind when designing an app:
 * Don't get into the habit of thinking that the way a textbook presents a solution is the only solution (or necessarily the best solution).
 * There's no rule that apps must mirror real life; if it's convenient and logical to encapsulate the deposit and withdraw mechanisms (methods) as part of the ”bank account”, then do it. If you can think of something better, then do that.
 
-## Where to save source code?
+## Java
+### Where to save source code?
 *Not* directly in the project folder! Example where to place the MathGames.java file:
 
 `~/JavaProjects/src/main/java/com/example/math/`
@@ -20,84 +22,87 @@ Here are some general points to keep in mind when designing an app:
 * Or, from the shell, using `mkdir --parents`
 * Check that the directory hierarchy was successfully created with `ls -R`
 
-## What are packages?
+### What are packages?
 A grouping of related classes and/or interfaces
-### Grouping mechanism
+#### Grouping mechanism
 * All classes and interfaces belonging to the same packages are placed in the same directory
 * Each source file contains a *package declaration*, which declares the name of the package the type belongs to
 * Package name mirrors the directory hierarchy that the source files are placed in
-### Why packages?
+#### Why packages?
 * Organizing types into logical categories makes it easier for the programmer and client to find them
 * Provies a namespace to prevent class naming conflicts
 * A means of access control (e.g., if a member of a class is `protected`, then it can be invoked/accessed within the package but not outside the package)
-## Source file structure
-Every class has the general structure
-1. Package declaration: tells the compiler which package this class belongs to
-2. Import statement(s): tells the compiler where to find types that belong to other packages (i.e., packages outside this class's package)
-3. Class header and body
 
-## When import statements are needed
-Types located outside the current class's package (exception: `java.lang` package).
+### When `import` statements are needed
+* Types located outside the current class's package (exception: `java.lang` package).
+* You can always write out a type's fully qualified name in lieu of an import statement.
 
-## Compiling
-Compiling is done by the JDK tool `javac`. Description:
+### Compiling
+Compiling is done by the JDK tool `javac`:
 
 > The `javac` tool reads class and interface definitions, written in the Java programming language, and compiles them into bytecode class files.
 
 Taking the example of the `MathGames.java` source file in the `com.example.math` package, and assuming the working directory is the project directory `~/JavaProjects/`, the compile command would be:
 
-`javac -d bin/main/java/ src/main/java/com/example/math/MathGames.java`
+`javac -d bin/main/java/ -verbose -Xlint src/main/java/com/example/math/MathGames.java`
 
-The `-d` option specifies the directory to put the compiled (`.class`) file. Note that source (`.java`) files should be located in `src/main/java/`, and compiled files in `bin/main/java/` as per the *Gradle* standard. If `bin/main/java` doesn't exist, it must be created first:
+* `-d` option: specifies the directory to put the compiled (`.class`) file. Note that source (`.java`) files should be located in `src/main/java/`, and compiled files in `bin/main/java/` as per the *Gradle* standard. If `bin/main/java` doesn't exist, it must be created first:
 
-`mkdir --parents bin/main/java/`
+ `mkdir --parents bin/main/java/`
 
-or, from *Emacs*,
+ or, from *Emacs*,
 
-`M-x make-directory RET bin/main/java/`
+ `M-x make-directory RET bin/main/java/`
 
-Also note that the compiled file will be placed at location
+ Also note that the compiled file will be placed at location
 
-`bin/main/java/com/example/math/`
+ `bin/main/java/com/example/math/`
 
-not
+ not
 
-`bin/main/java/`
+ `bin/main/java/`
 
-even though the package directory hierarchy is not specified after the `-d` option. This is because `javac` is programmed to do this (it knows the package hierarchy from the *package declaration* in the source file).
+ even though the package directory hierarchy is not specified after the `-d` option. This is because `javac` is programmed to do this (it knows the package hierarchy from the *package declaration* in the source file).
 
-### Verbose compile
-To get a better idea of what `javac` is doing when it compiles (including each class that's loaded), use the `-verbose` option:
+* `-verbose` option: tells `javac` to print out what it's doing (could be good for diagnosing errors)
+* `-Xlint` option: Enable all warnings
 
-`javac -d bin/main/java/ -verbose src/main/java/com/example/math/MathGames.java`
+### Running an app
+Execution is done by the JDK tool `java` (*Java launcher*):
 
-### Enable all warnings
-`javac -d bin/main/java -Xlint src/main/java/com/example/math.MathGames.java`
+> The `java` tool launches a Java application. It does this by starting a Java runtime environment, loading a specified class, and invoking that class's `main` method.
 
-## Running an app
-`.class` files are run by the *Java launcher* `java`. Assuming the working directory is `~/JavaProjects/`, then `MathGames.class` is run with:
+You can run the `MathGames` class from *any* directory by specifying `MathGames`'s location with the (*classpath*) option `-cp`:
 
-`java bin/main/java/ com.example.math.MathGames`
+`java -cp ~/JavaProjects/bin/main/java/ com.example.math.MathGames`
 
-A couple of things to note:
-* When specifying the location of `MathGames.class`, `java` is programmed to expect its “project” location, i.e.,
+Or else you must `cd` to `MathGames`'s location and run it from there:
 
-  `bin/main/java/`
+```shell
+$ cd ~/JavaProjects/bin/main/java/
+$ java com.example.math.MathGames
+```
+#### Some explanatory notes
+* `java` is programmed to expect a class's *name* as its argument, not a class's filepath (location). This is why you need the `-cp` option to specify the class's location and can't just run a class like this:
 
-  *not* its “package” location, i.e., not:
+ `java ~/JavaProjects/bin/main/java/com/example/math/MathGames.class`
 
-  `bin/main/java/com/example/math`
+ Furthermore, `java` is programmed to expect the *fully qualified* class name (e.g., `com.example.math.MathGames`), not just the class's root name (e.g., `MathGames`).
+* When specifying the class's location with `-cp`, `java` is programmed to expect its location within the project *excluding* the “package” part of its location. That is, `java` expects:
 
-* When specifying the object to be run, `java` is programmed to expect the object's fully qualified name, i.e.,
+ `-cp ~/JavaProjects/bin/main/java/`
 
-  `com.example.math.MathGames`
+ not:
 
-  *not* the object's fully qualified filename i.e., not
+ `-cp ~/JavaProjects/bin/main/java/com/example/math/`
+* It's not enough to tell `java` which class to run; it must also be told *where* to look for it. One way to do this is with the `-cp` option explained above. Another way is via the environmental variable `CLASSPATH`, which represents a list of pathnames (locations) for `java` to search. `java` will search—and only search—the locations specified by `CLASSPATH`; if the given class is not located in one of the directories specified in `CLASSPATH`, then `java` will complain that it couldn't find the class and won't run it.
 
-  `bin/main/java/com/example/math/MathGames.class`
+ By default, `CLASSPATH` is set to the working directory only. This is why `cd`ing directly to a class's location (e.g., `~/JavaProjects/bin/main/java/`) allows `java` to find the class even if the `cp` option isn't used.
 
-## Placing an app under Git verison control
-### Check Git installation
+ Note: It is considered bad practice to set `CLASSPATH`. It is recommended to always use `-cp`.
+## Git
+### Placing an app under Git verison control
+#### Check Git installation
 `git --version`
 
 ### Configure Git
