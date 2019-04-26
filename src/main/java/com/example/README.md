@@ -34,6 +34,9 @@ Write a class that implements the “easier” methods of `java.lang.String`.
 # StringManipulator
 ## Requirements
 ### 1.0
-Write a class that encapsulates a “string manipulator”—an object that manipulates a given string in various ways. In this version, the manipulator includes a method called `frontBack` that outputs a given string in reverse order.
+Write a class that encapsulates a “string manipulator”—an object that manipulates a given string in various ways.
+
+In this initial version, `StringManipulator` includes a method called `frontBack`, which returns a new string where the first and last characters have been exchanged.
+
 ### Possible future versions
 Add various additional string manipulation methods.
