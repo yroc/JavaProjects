@@ -120,34 +120,14 @@ $ git config --global user.name John Doe
 $ git config --global user.email johndoe@gmail.com
 $ git config --global core.editor "emacs -nw"
 ```
-
 * These commands edit the *global* config file (located at `~/.gitconfig`).
 * There are also a *local* (viz., project specific) config files, called `config`, located in each project's `.git/` directory.
 
 #### Creating a Git repository for a project
 Directly within the project directory, enter the command `git init` (this creates the `.git/` directory—the repository).
 
-#### View the current status
-`git status`
-
-#### Ignoring files
-You want to ignore all compiled files (`.class` files in the case of Java). Git will ignore (not track) all files identified in a file called `.gitignore` (you create this file yourself just inside the project directory):
-
-`emacs -nw .gitignore`
-
-To ignore `.class` files, you can do either:
-
-```
-# Compiled class files
-*.class
-```
-
-or
-
-```
-# bin/ directory
-bin/
-```
+#### Add a README.md
+Create a file called `README.md`.
 
 #### Staging untracked files
 Examples:
@@ -157,21 +137,14 @@ git add .
 git add *.java
 git add README.md
 ```
+#### View the current status
+`git status`
 
 #### Committing files to the repository
 ##### Commit with a one-line commit message
 For example, committing a new file:
 
 `git commit -m "Initialize"`
-
-##### Commit with a subject and body commit message
-When you need to explain the change in more detail. The format is like an email; the subject *summarizes*  what you've done, while the body describes in more detail what you've done *and* explains *why* you've done it (but not how you've done it—leave the “how” out of it).
-
-Summary of Chris Beams' Git commit message rules:
-Subject line: Separate subject from body with a blank line, limit to 50 chars, sentence case, don't  end with a period, imperative mood.
-Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are OK (use dash or asterisk as bullet).
-
-* To wrap at 72 characters, use `C-x f` to set fill-column width, and `M-q` to fill a paragraph.
 
 ### Transfering project to Github (remote repository)
 #### Create a new remote repository
@@ -187,8 +160,31 @@ Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are O
 
 For subsequent pushes (uploads), you only need `git push`
 
-### Add a README.md
-Each Git repository has at least one `README.md` file. Each subdirectory in the project hierarchy can have its own `README.md`.
+#### Ignoring files
+Create a file called `.gitignore` (just inside the project directory).
+
+Inside `gitignore`: To ignore `.class` files:
+
+```
+# Compiled class files
+*.class
+```
+
+or
+
+```
+# bin/ directory
+bin/
+```
+
+##### Commit with a subject and body commit message
+When you need to explain the change in more detail. The format is like an email; the subject *summarizes*  what you've done, while the body describes in more detail what you've done *and* explains *why* you've done it (but not how you've done it—leave the “how” out of it).
+
+Summary of Chris Beams' Git commit message rules:
+Subject line: Separate subject from body with a blank line, limit to 50 chars, sentence case, don't  end with a period, imperative mood.
+Body: Wrap at 72 characters, as many paragraphs as you need, bullet points are OK (use dash or asterisk as bullet).
+
+* To wrap at 72 characters, use `C-x f` to set fill-column width, and `M-q` to fill a paragraph.
 
 ### Renaming a file in Git
 `git mv Sequences.java MathSequenceGenerator.java`
