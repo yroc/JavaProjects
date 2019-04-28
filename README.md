@@ -74,7 +74,7 @@ Taking the example of the `MathGames.java` source file in the `com.example.math`
 * `-Xlint` option: Enable all warnings
 
 ### Running an app
-Execution is done by the JDK tool `java` (*Java launcher*):
+JDK tool `java` (*Java launcher*):
 
 > The `java` tool launches a Java application. It does this by starting a Java runtime environment, loading a specified class, and invoking that class's `main` method.
 
@@ -107,83 +107,8 @@ $ java com.example.math.MathGames
 
   **Note**: It is considered bad practice to set `CLASSPATH` and rely on it. It is recommended to leave `CLASSPATH` alone and to always use `-cp`.
 
-### Error: “Non-static method cannot be referenced from a static context”
-Trying to run this code gives the “non-static” error:
-```java
-public class MathSequenceGenerator
-{
-    public void fibonacci()
-    {
-	int i_2 = 1;		// The (i - 2)th term
-	int i_1 = 1;		// The (i - 1)th term
-	int i;			// The ith term
-
-	// Print out the initial two terms
-	System.out.print(i_2 + ", ");
-	System.out.print(i_1 + ", ");
-
-	// Compute and print the next 17 terms
-	for (int n = 1; n <=17; n++)
-	    {
-		i = i_2 + i_1;
-		System.out.print(i + ", ");
-		i_2 = i_1;
-		i_1 = i;
-	    }
-
-	// Print out the last term
-	System.out.println(i_2 + i_1);
-    }
-
-    public static void main(String[] arguments)
-    {
-	
-	fibonacci();
-    }
-}
-```
-Why? Because in the `main` method, you're trying to invoke a *non-static* method (`fibonacciSequence`) as if it were static (i.e., there is no object instantiation, and you're not calling `fibonacciSequence()` on an object).
-
-To make this right, you must either make `fibonacciSequence()` static, or else instantiate a `Sequences` object and call `fibonacciSequence` on that object. But notice that `Sequences` has no constructor, and also notice that it has no attributes (no state), so it appears, at least for the time being, it makes sense to leave the class as a *utility* (static) class. In that case, just make `fibonacciSequence` static, and you're good to go!
-
-### String substring method, length of substring
-```
-public String substring(int beginIndex,
-                  int endIndex)
-```
-> Returns a new string that is a substring of this string. The substring begins at the specified `beginIndex` and extends to the character at index `endIndex - 1`. Thus, the length of the substring is `endIndex-beginIndex`.
-
-**Question**: What if `endIndex` is out of bounds, as would be the case if the substring to be returned extended right to the end of this string (e.g., if this string is `"command"`, then `endIndex` would have to be 7 to return a substring that included the `d` at the end).
-
-**Answer**: `endIndex` need not be interpreted as an index at all (perhaps the parameter name `endIndex` is misleading in this case). Here's a rephrasing of the method's description: "Returns the string composed of character(s) from index `beginIndex` up to but excluding the character at the index immediately preceding the integer `endIndex`."
-
-Examples:
-* `str.substring(0,6)` returns the string in `str` from characters 0 to 6, excluding 6 (namely, the characters from indeces 0 through 5 inclusive).
-* `str.substring(1,2)` returns the string in `str` from characters 1 to 2, excluding 2 (namely, the character at index 1)
-* `str.substring(1,1)` returns the string in `str` from characters 1 to 1, excluding 1 (namely, the empty string)
-
-**Question**: How do they get the length to be `endIndex-beginIndex`?
-
-**Answer**: First, note that the general length formula for a string is `j - (i - 1)`, where `i` is the index of the initial character of the string and `j` is the index of the final character of the string. Why is this the general string formula? Because `i` and `j` are both included in the string (length is all the characters in the string, including both the initial and final characters). The subtrahend is thus `i - 1` because we don't want to subtract `i` itself (it needs to be included); we want to subtract the character *before* `i` (i.e., `i - 1`).
-
-Next, note that `substring(beginIndex, endIndex)` is defined such that `beginIndex` specifies the index of the initial character of the returned substring, and `endIndex` specifies the index of the character *immediately succeeding* the final character of the returned substring. Thus, the index of the final character of the returned substring is `endIndex - 1`.
-
-Finally then, the length of the returned substring is `(endIndex - 1) - (beginIndex - 1)`, which simplifies to `endIndex - beginIndex`.
-
-An important consequence is that if `beginIndex = endIndex`, the length of the returned substring is `0` (i.e., the returned substring is the empty string).
-
 ### Java check version
 `java --version`
-
-### Viewing Java API source code
-There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
-
-1. If necessary, download the Java JDK gzip from Oracle (e.g., `jdk-11.0.2_linux-x64_bin.tar.gz`)
-2. Extract the downloaded `tar.gz` file to a convenient place (e.g., `~/`)
-3. `cd` to `~/jdk-11.0.2/lib/`, where you should find `src.zip`—the archive that contains the source code for the Java platform
-4. Unzip `src.zip`. This will create a several dozen directories that begin with either `java` or `jdk`.
-5. `cd` to `java.base/`, which contains the package namespace directory `java/lang/` (corresponding to the package name `java.lang`)
-6. `cd` to `java/lang/`. There you will find all of the Java API types in the `java.lang` package, including `String.java`, `StringBuilder.java`, `Object.java`, `Math.java`, `System.java`, and `Comparable.java`.
 
 ## Git
 ### Check Git installation
@@ -284,7 +209,7 @@ In addition to archiving files, it is common to *compress* the newly-created arc
 `tar -xvf example.tar.gz`
 
 * `x` (required), means extract. This option is required because `tar` also archives files, and you need to tell it which of the two operations you want it to do.
-* `v` (optional), means "be verbose".
+* `v` (optional), means "be verbose". `tar` prints to the console what it's doing while it's doing it. Useful to ensure especially when extracting large archives so you know that `tar` didn't freeze or something.
 * `f` (required, must be last), means, "Operate on the given file". This option is required because `tar` is programmed to operate on a "default" file if a file is not specified (see https://www.gnu.org/software/tar/manual/tar.html#SEC14 for more detail)
 
 Note that you can also include the command option `z`, which tells `tar` to decompress the file using `gzip`, but `tar` is programmed to automatically decompress the given file using `gzip` when the given file extension is `.gz`.
@@ -293,3 +218,22 @@ Note that you can also include the command option `z`, which tells `tar` to deco
 ### Scroll other window
 `C-M-v` (scroll up)\
 `C-M-S-v` (scroll down)
+
+### Packages
+Since version 24.1, *Emacs* includes the *built-in* ability to manage *packages*—Emacs Lisp programs that implement additional features (§48). This built-in package manager is an Emacs Lisp program called `package.el`.
+
+Packages themselves are stored in *package archives*, aka *repositories*. Although there are several Emacs package archives, there is only one *official* archive, called *ELPA* (Emacs Lisp Package Archive). “Official” means that this is the repository pre-packed with Emacs and is copyrighted by the *Free Software Foundation* (and it is perhaps the case that its packages are more strictly controlled in terms of quality assurance). It's also generally recognized that *ELPA* contains are relatively small number of packages. Thus the interest in third-party package archives…
+
+If you want the package manager to search third-party repositories (e.g., *MELPA*), you have to tell it to do so. MELPA, as well as *MarmaladeRepo*, are the most popular third-party Emacs package repos.
+
+#### Adding the MELPA repository
+This is done with eLisp code in your init file (see init file).
+
+#### Installing (and deleting) packages
+1) `M-x list-packages` to open a buffer listing all packages from all installed repos.
+2) `ENT` to describe the package under cursor (optional)
+3) `i` to mark the package on the current line for installation (or `d` to mark for uninstallation). Also useful is `u` to remove an install or delete  mark if you make a mistake.
+4) `x` to execute all marked installations and deletions
+
+#### Installed package location
+`~/.emacs.d/elpa`
