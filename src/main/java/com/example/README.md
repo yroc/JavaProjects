@@ -49,6 +49,55 @@ At least up until Java 8, the “underlying data structure” of a `String` was 
 * Similarly, the methods `codePointAt` and `codePointBefore`, which return the Unicode code point (as an `int`) at the specfied (or before the specified) index make sense.
 * Similarly, the constructor `String(char[] value)` makes sense.
 * This does not mean that `String`s and `char` arrays are the same thing. `String`s have a large number of `String` *methods* that aren't available to `char` arrays. Actually, even though arrays are considered objects in Java (see JLS §4.3.1), arrays don't have methods commonly associated with “objects” in the traditional sense (i.e., class instances). That said, all methods of class `Object` may be invoked on an array, and arrays may be asigned to variables of type `Object`. In addition, there is a `java.util.Arrays` utility class that contains many methods for operating on arrays.
+
+### Declaring an array variable
+An array can hold any primitive type. The syntax for declaring an array variable is almost the same as for declaring a “regular” variable—just add brackets in front of the type, e.g.,:
+
+`private char[] charArr     // declaring a (private) char array called "charArr"`
+
+It's a common beginner mistake to confuse declaring an array variable with actually creating an array. Declaring an array variable does not actually create an array. That is,
+
+`private char[] charArr`
+
+does not create a `char` array; it merely tells the compiler that `charArr` is legally able to hold a reference to a `char` array. You still have to actually create the array (the creation process generates a reference, which can then be assigned an an array variable of the correct type).
+
+### Creating an array
+You can create an array with the `new` keyword:
+
+`charArr = new char[10]     // create a char array with a capacity to hold 10 chars, and assign its reference to charArr (a previously-declared char array)`
+
+Note that creating an array this way doesn't place any elements in it (the array has a *capacity* of 10, but it's still “empty”).
+
+An alternative way of creating an array allows you to place elements in it at the same time you create it:
+
+`charArray` = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+
+Note that with this way of creating an array, the length is specified *implicitly* (by the number of elements specified).
+
+### String constructor from `char` array
+When constructing a string from a `char` array, why make a copy of the argument array? That is, why do:
+
+```java
+public String(char[] value)
+{
+  this.value = Arrays.copyOf(value, value.length);
+}
+```
+
+instead of the simpler:
+
+```java
+public String(char[] value)
+{
+  this.value = value;
+}
+```
+
+Answer: If you do `this.value = value`; then the newly-constructed string will reference the same array as `value`. This means if `value` is changed (which it can be, as arrays are mutable), then the string will change! (not good, especially since `String` is supposed to be an immutable type!).
+
+### Accessing array length
+Eve though arrays are not mentioned in the Java API, they are still considered to be objects in Java (JLS§4.3.1, §10), and as such they can have attributes and methods. As it turns out, arrays have exactly *one* attribute: `length` (JLS§10.7, Array Members). An array's length can be accessed with the usual object-oriented syntax, e.g., `charArray.length`.
+
 ### Viewing Java API source code
 There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
 
