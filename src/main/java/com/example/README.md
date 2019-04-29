@@ -42,7 +42,18 @@ Write a small subset of `java.lang.String`. This version should include (in orde
 11) The `charAt` method (with accompanying Javadoc)
 ### Possible future versions
 * Fully implement `java.lang.String`.
+
 ## Notes
+### Viewing Java API source code
+There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
+
+1. If necessary, download the Java JDK gzip from Oracle (e.g., `jdk-11.0.2_linux-x64_bin.tar.gz`)
+2. Extract the downloaded `tar.gz` file to a convenient place (e.g., `~/`)
+3. `cd` to `~/jdk-11.0.2/lib/`, where you should find `src.zip`—the archive that contains the source code for the Java platform
+4. Unzip `src.zip`. This will create a several dozen directories that begin with either `java` or `jdk`.
+5. `cd` to `java.base/`, which contains the package namespace directory `java/lang/` (corresponding to the package name `java.lang`)
+6. `cd` to `java/lang/`. There you will find all of the Java API types in the `java.lang` package, including `String.java`, `StringBuilder.java`, `Object.java`, `Math.java`, `System.java`, and `Comparable.java`.
+
 ### A `String` object is a `char` array
 At least up until Java 8, the “underlying data structure” of a `String` was a `char` array (after Java 8 they switched to a `byte` array for unknown reasons). Here are several things to note about this:
 * The individual characters of a `String` are `char`s. So the `String` method `charAt`, which returns the `char` at the specified index makes sense.
@@ -51,28 +62,67 @@ At least up until Java 8, the “underlying data structure” of a `String` was 
 * This does not mean that `String`s and `char` arrays are the same thing. `String`s have a large number of `String` *methods* that aren't available to `char` arrays. Actually, even though arrays are considered objects in Java (see JLS §4.3.1), arrays don't have methods commonly associated with “objects” in the traditional sense (i.e., class instances). That said, all methods of class `Object` may be invoked on an array, and arrays may be asigned to variables of type `Object`. In addition, there is a `java.util.Arrays` utility class that contains many methods for operating on arrays.
 
 ### Declaring an array variable
-An array can hold any primitive type. The syntax for declaring an array variable is almost the same as for declaring a “regular” variable—just add brackets in front of the type, e.g.,:
+An array can hold any primitive type (it can also hold any reference type, too, but it's uncommonly used for that purpose). The syntax for declaring an array variable is almost the same as for declaring a “regular” variable—just add brackets in front of the type, e.g.,:
 
-`private char[] charArr     // declaring a (private) char array called "charArr"`
+`private char[] charArr;    // declaring a (private) char array called "charArr"`
 
-It's a common beginner mistake to confuse declaring an array variable with actually creating an array. Declaring an array variable does not actually create an array. That is,
+It's a common beginner mistake to confuse declaring an array variable with actually creating an array. Declaring an array variable does *not* create an array. That is,
 
-`private char[] charArr`
+`private char[] charArr;`
 
-does not create a `char` array; it merely tells the compiler that `charArr` is legally able to hold a reference to a `char` array. You still have to actually create the array (the creation process generates a reference, which can then be assigned an an array variable of the correct type).
+does not create a `char` array; it only creates a `char` array *variable* (called `charArr`), which can legally hold a reference to any `char` array (which may or may not already exist). But creating a `char` array is a *separate process*.
 
 ### Creating an array
 You can create an array with the `new` keyword:
+```java
+charArr = new char[10];  // Create a char array consisting of 10 memory units,
+                         // (where each memory unit is of memory size char -- perhaps 2 bytes)
+                         // and assign its reference to charArr (a previously-declared
+					     // char array variable).
+						 // Each memory unit is set to the null character (U+0000)
+```
 
-`charArr = new char[10]     // create a char array with a capacity to hold 10 chars, and assign its reference to charArr (a previously-declared char array)`
+An alternative way of creating an array allows you to place the elements you want in it at the time you create it:
 
-Note that creating an array this way doesn't place any elements in it (the array has a *capacity* of 10, but it's still “empty”).
-
-An alternative way of creating an array allows you to place elements in it at the same time you create it:
-
-`charArray` = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+`charArray` = {'m', 'e', 'a', 'n', 'i', 'n', 'g', 'f', 'u', 'l'};
 
 Note that with this way of creating an array, the length is specified *implicitly* (by the number of elements specified).
+
+### Accessing an array
+Given `charArray = {'m', 'e', 'a', 'n', 'i', 'n', 'g', 'f', 'u', 'l'};`
+
+```java
+charArray[0]   // evaluates to the char value m
+charArray[1]   // evaluates to the char value e
+charArray[2]   // evaluates to the char value a
+
+// and so on
+```
+### Assigning values to an array
+Unlike `String`, the `array` data type is mutable, i.e., its elements can be changed after its creation (the only exception being, its length *cannot* be changed, JLS §10.2.
+
+The following program, which demonstrates array assignment (among other concepts), outputs `5050`:
+
+```java
+class Gauss
+{
+  public static void main(String[] arguments)
+  {
+    int[] ia = new int[101];
+	for (int i = 0; i < ia.length; i++)
+	{
+	  ia[i] = i;
+	}
+	int sum = 0;
+	for (int e : ia)
+	{
+	  sum = sum + e;
+	  System.out.println(sum);
+	}
+  }
+}
+```
+
 
 ### String constructor from `char` array
 When constructing a string from a `char` array, why make a copy of the argument array? That is, why do:
@@ -97,16 +147,6 @@ Answer: If you do `this.value = value`; then the newly-constructed string will r
 
 ### Accessing array length
 Eve though arrays are not mentioned in the Java API, they are still considered to be objects in Java (JLS§4.3.1, §10), and as such they can have attributes and methods. As it turns out, arrays have exactly *one* attribute: `length` (JLS§10.7, Array Members). An array's length can be accessed with the usual object-oriented syntax, e.g., `charArray.length`.
-
-### Viewing Java API source code
-There's nothing magical about the Java API source files (e.g., `String.java`)—they're all included in the JDK root directory (e.g., `jdk-11.0.2`), and it's just a matter of finding them (i.e., which subdirectories they're stored in). The general procedure is:
-
-1. If necessary, download the Java JDK gzip from Oracle (e.g., `jdk-11.0.2_linux-x64_bin.tar.gz`)
-2. Extract the downloaded `tar.gz` file to a convenient place (e.g., `~/`)
-3. `cd` to `~/jdk-11.0.2/lib/`, where you should find `src.zip`—the archive that contains the source code for the Java platform
-4. Unzip `src.zip`. This will create a several dozen directories that begin with either `java` or `jdk`.
-5. `cd` to `java.base/`, which contains the package namespace directory `java/lang/` (corresponding to the package name `java.lang`)
-6. `cd` to `java/lang/`. There you will find all of the Java API types in the `java.lang` package, including `String.java`, `StringBuilder.java`, `Object.java`, `Math.java`, `System.java`, and `Comparable.java`.
 
 # StringManipulator
 ## Requirements
