@@ -5,10 +5,10 @@ Write a class that encapsulates methods that simulate various math games.
 
 This intial version includes two methods: `fizzbuzz` and `addends`.
 
-`fizzbuzz` simulates the children's counting game *Fizz Buzz*:
+`fizzbuzz` simulates the children's division game *Fizz Buzz*:
 >FizzBuzz is a game I learned long ago in elementary school French class as a way to practice counting in that language. The players take turns counting, starting with one and going up. The rules are simple: when your turn arrives, you say the next number. However, if that number is a multiple of five, you say "fizz" instead. If the number is a multiple of seven, you say "buzz." And if the number is a multiple of both, you say "fizzbuzz."
 
-`fizzbuzz` should print out the first 100 terms that would be generated when playing *Fizz Buzz*.
+`fizzbuzz` should print out the first *n* terms that would be generated when playing *Fizz Buzz*. The value of `n` is passed to the app at the command line.
 
 `addends` receives the set of integers `[1, 2, 5, 6, 17]` and the integer `23` and returns the pair of integers in the set that sum to 23 (namely, `6` and `17`).
 

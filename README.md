@@ -3,7 +3,9 @@
 ### Categorizing the input
 When creating a program, a useful tip is to categorize the input into a finite number cases. Think about the input systematically (i.e., in order). For example, if the input is of type String, are strings of any length allowed? If so, start with the simplest case (i.e., the empty string), and work your way up. Maybe the empty string needs to be handled one way, and strings of length 1 or 2 must be handled a different way (but the same way as each other), and strings of length greater than 2 must be handled in yet a different way (but the same as each other).
 ### Using `if`, `if`, `if`, … vs `if`, `else-if`, `else-if`, …
-The basic difference is that with separate `if` blocks, there is the possibility that each block may run (in case each condition is true). Whereas with an `if-else` block, only one subblock can run (regardless of whether or not more than one condition is true). For an example, try writing the `fizzBuzz()` method.
+The basic difference is that with separate `if` blocks, the compiler will always test each condition, and there is therefore the possibility that each block may run (in case each condition is true). Whereas with an `if-else` block, the compiler will stop testing conditions as soon as it encounters one that's true (or, if none are true, it will run the `else` block. Thus, only one subblock can run (regardless of whether or not more than one condition is true). For an example, try writing the `fizzBuzz()` method.
+### What is `if`, `else if`, `else`?
+`if`s essentially represent *cases*. So, break down your input into a finite number of cases, and an `if` will represent each case.
 
 ## Object orientation
 ### App design
@@ -16,6 +18,8 @@ Here are some general points to keep in mind when designing an app:
 * There's no rule that apps must mirror real life; if it's convenient and logical to encapsulate the deposit and withdraw mechanisms (methods) as part of the ”bank account”, then do it. If you can think of something better, then do that.
 
 ## Java
+### Java check version
+`java --version`
 ### Where to save source code?
 *Not* directly in the project folder! Example where to place the MathGames.java file:
 
@@ -107,8 +111,24 @@ $ java com.example.math.MathGames
 
   **Note**: It is considered bad practice to set `CLASSPATH` and rely on it. It is recommended to leave `CLASSPATH` alone and to always use `-cp`.
 
-### Java check version
-`java --version`
+### Using command-line arguments
+For example,
+```shell
+java -cp bin/main/java/ com.example.math.MathGames 150
+```
+will supply the string "150" to the `String` array `args` from the classic `main` method header:
+
+`public static void main(String[] args)`
+
+which can then be used by the app. It can be accessed with `args[0]`. To convert it to an `int`, you can do something like:
+
+`int n = Integer.parseInt(args[0]);`
+
+Multiple arguments are space delimited. E.g.,:
+
+`java -cp bin/main/java/ com.example.math.MathGames 150 100 140`
+
+which can then be accessed with `args[0]`, `args[1]`, and `args[2]` respectively.
 
 ## Git
 ### Check Git installation
